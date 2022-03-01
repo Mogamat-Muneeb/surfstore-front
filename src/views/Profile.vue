@@ -5,6 +5,10 @@
         <strong>{{ currentUser.fullname }}</strong> Profile
       </h3>
     </header>
+     <p>
+      <strong>Name:</strong>
+      {{ currentUser.fullname }}
+    </p>
     <p>
       <strong>Token:</strong>
       {{ currentUser.accessToken.substring(0, 20) }} ...
@@ -12,7 +16,7 @@
     </p>
     <p>
       <strong>Id:</strong>
-      {{ currentUser.id }}
+      {{ currentUser._id }}
     </p>
     <p>
       <strong>Email:</strong>
