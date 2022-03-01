@@ -4,7 +4,7 @@
       <div class="name col">
   
         <h1  style="font-size:80px;">SURF STORE</h1>
-        <h6 style="font-size:20px;color:#1e90ff;">Your local surf store</h6>
+        <h6 style="font-size:20px;color:#1e90ff;">Your local Surf Store</h6>
 
      
       </div>

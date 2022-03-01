@@ -8,22 +8,23 @@
  
         <div class="form-group">
                     <label class="form-label" id="nameLabel" for="name"></label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Username" tabindex="1"  required v-model="name">
+                    <!-- <Field type="text" class="form-control" id="name" name="fullname"  tabindex="1" /> -->
+                    <Field name="fullname" type="text" class="form-control" placeholder="Username" />
+                    <ErrorMessage name="fullname" class="error-feedback" />
                     
                 </div>
-
-           
-
                 <div class="form-group">
                     <label class="form-label" id="subjectLabel" for="sublect"></label>
-                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Password" tabindex="3" required v-model="contact">
+                    <!-- <Field type="text" class="form-control" id="subject" name="password"  tabindex="3"/> -->
+                    <Field name="password" type="password" class="form-control" placeholder="Password" />
+                    <ErrorMessage name="password" class="error-feedback"/>
                 </div>
-
+                <div class="form-group">
                 <div class=" b text-center margin-top-25">
-                    <button type="submit" class="btn btn-mod btn-border btn-large">LOGIN</button>
+                    <button class="btn btn-mod btn-border btn-large">LOGIN</button>
 
                 </div>
-
+                </div>
         <div class="signUp">
              <a href="#" id="signup">Don't have an account yet?</a>
         </div>
@@ -35,9 +36,59 @@
 </template>
 
 <script>
-export default {
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
 
-}
+export default {
+  name: "Login",
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+  },
+  data() {
+    const schema = yup.object().shape({
+    fullname: yup.string().required("username is required"),
+    password: yup.string().required("Password is required")
+    });
+    return {
+      loading: false,
+      message: "",
+      schema,
+    
+     
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+   created() {
+    if (this.loggedIn) {
+      this.$router.push("/Profile");
+    }
+  },
+  methods: {
+    handleLogin(user) {
+      this.loading = true;
+      this.$store.dispatch("auth/login", user).then(
+        () => {
+          this.$router.push("/Profile");
+        },
+        (error) => {
+          this.loading = false;
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+        }
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -5,32 +5,36 @@
         <h1>SIGN UP</h1>
  
       </div>
-      <Form @submit="handleLogin" :validation-schema="schema">
+      <Form @submit="handleRegister" :validation-schema="schema">
         <div v-if="!successful">
         
                 <div class="form-group">
                     <label class="form-label" id="nameLabel" for="name"></label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Username" tabindex="1"  required v-model="name">
-                    
+                    <Field type="text" class="form-control" id="fullname" name="fullname" placeholder="Username" tabindex="1"  />
+                    <ErrorMessage name="fullname" class="error-feedback" />
+    
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" id="emailLabel" for="email"></label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" tabindex="2" required v-model="email">
+                    <Field type="email" class="form-control" id="email" name="email" placeholder="Your Email" tabindex="2" />
+                    <ErrorMessage name="email" class="error-feedback" />
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" id="subjectLabel" for="sublect"></label>
-                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Contact Number" tabindex="3" required v-model="contact">
+                    <Field type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Contact Number" tabindex="3" />
+                    <ErrorMessage name="phone_number" class="error-feedback" />
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" id="subjectLabel" for="sublect"></label>
-                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Password" tabindex="3" required v-model="contact">
+                    <Field type="text" class="form-control" id="password" name="password" placeholder="Password" tabindex="3"/>
+                    <ErrorMessage name="password" class="error-feedback" />
                 </div>
 
                 <div class=" b text-center margin-top-25">
-                    <button type="submit" class="btn btn-mod btn-border btn-large">SIGN UP</button>
+                    <button class="btn btn-mod btn-border btn-large">SIGN UP</button>
 
                 </div>
           <div class="signUp">
@@ -44,9 +48,80 @@
 </template>
 
 <script>
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
 export default {
-
-}
+  name: "Register",
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+  },
+  data() {
+    const schema = yup.object().shape({
+      fullname: yup
+        .string()
+        .required("Username is required!")
+        .min(3, "Must be at least 3 characters!")
+        .max(20, "Must be maximum 20 characters!"),
+      email: yup
+        .string()
+        .required("Email is required!")
+        .email("Email is invalid!")
+        .max(50, "Must be maximum 50 characters!"),
+      password: yup
+        .string()
+        .required("Password is required!")
+        .min(6, "Must be at least 6 characters!")
+        .max(40, "Must be maximum 40 characters!"),
+     phone_number: yup
+        .string()
+        .required("Password is required!")
+        // .min(6, "Must be at least 6 characters!")
+        // .max(40, "Must be maximum 40 characters!"),
+    });
+    return {
+      successful: false,
+      loading: false,
+      message: "",
+      schema,
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  mounted() {
+    if (this.loggedIn) {
+      this.$router.push("/Profile");
+    }
+  },
+  methods: {
+    handleRegister(user) {
+      this.message = "";
+      this.successful = false;
+      this.loading = true;
+      this.$store.dispatch("auth/register", user).then(
+        (data) => {
+          this.message = data.message;
+          this.successful = true;
+          this.loading = false;
+        },
+        (error) => {
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          this.successful = false;
+          this.loading = false;
+        }
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>

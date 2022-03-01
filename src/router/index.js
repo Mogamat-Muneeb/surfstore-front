@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import Products from '../views/Products.vue'
-import Profile from '../views/Profile.vue'
+// import Profile from '../views/Profile.vue'
 import Cart from '../views/Cart.vue'
 // import { from } from 'core-js/core/array'
 
-
+const Profile = () => import("../views/Profile.vue")
 const routes = [
   {
     path: '/',
@@ -23,7 +23,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: Login
   },
   {
     path: '/SignUp',
@@ -31,7 +31,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/SignUp.vue')
+    component: SignUp
   },
   {
     path: '/Products',
@@ -39,7 +39,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Products.vue')
+    ccomponent: Products
   },
   {
     path: '/Profile',
@@ -47,7 +47,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
+    component: Profile
   },
   {
     path: '/Cart',
@@ -55,15 +55,15 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Cart.vue')
+    component: Cart
   },
 
   
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  history: createWebHistory(),
+  routes,
 })
 
 
