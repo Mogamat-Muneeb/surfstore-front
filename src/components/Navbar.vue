@@ -10,11 +10,12 @@
  
     <router-link @click="toggleNav" to="/">Home</router-link>
 
-    <router-link @click="toggleNav" :to="{ name: 'Login'}">Login</router-link>
-    <router-link @click="toggleNav" :to="{ name: 'SignUp'}">Sign Up</router-link>
-    <router-link @click="toggleNav" :to="{ name: 'Products'}">Products</router-link>
-    <router-link @click="toggleNav" :to="{ name: 'Profile'}">Profile</router-link>
-    <router-link @click="toggleNav" :to="{ name: 'Cart'}">Cart</router-link>
+    <router-link v-if="!currentUser" @click="toggleNav" :to="{ name: 'Login'}">Login</router-link>
+    <router-link v-if="!currentUser" @click="toggleNav" :to="{ name: 'SignUp'}">Sign Up</router-link>
+    <router-link v-if="currentUser"  @click="toggleNav" :to="{ name: 'Products'}">Products</router-link>
+    <router-link v-if="currentUser" @click="toggleNav" :to="{ name: 'Profile'}">Profile</router-link>
+    <router-link v-if="currentUser" @click="toggleNav" :to="{ name: 'Cart'}">Cart</router-link>
+    <button class="btn" v-if="currentUser" @click="logOut">logout</button>
 </nav>    
 <button id="nav-btn" @click="toggleNav">
     <i class="fa fa-bars"></i>
@@ -33,7 +34,17 @@ export default {
         toggleNav() {
             this.isActive = !this.isActive;
         },
+        logOut() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
     },
+    computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+   
+  }
 };
 </script>
 
@@ -57,6 +68,7 @@ export default {
 
     
 }
+
 
 #nav-btn{
     position: fixed;

@@ -25,9 +25,16 @@
 
                 </div>
                 </div>
+                <div class="form-group">
+            <div v-if="message" class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+            
+        </div>
         <div class="signUp">
              <a href="#" id="signup">Don't have an account yet?</a>
         </div>
+        
        
       </Form>
     </div>
