@@ -6,24 +6,19 @@ import SignUp from '../views/SignUp.vue'
 import Products from '../views/Products.vue'
 import Profile from '../views/Profile.vue'
 import Cart from '../views/Cart.vue'
+// import { from } from 'core-js/core/array'
 
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,About,Login,SignUp,Products,Profile,Cart
+    component: Home
   },
+  
+ 
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
-    path: '/about',
+    path: '/Login',
     name: 'Login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -31,7 +26,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
   {
-    path: '/about',
+    path: '/SignUp',
     name: 'SignUp',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -39,7 +34,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/SignUp.vue')
   },
   {
-    path: '/about',
+    path: '/Products',
     name: 'Products',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -47,7 +42,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Products.vue')
   },
   {
-    path: '/about',
+    path: '/Profile',
     name: 'Profile',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -55,7 +50,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
   },
   {
-    path: '/about',
+    path: '/Cart',
     name: 'Cart',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -71,4 +66,16 @@ const router = createRouter({
   routes
 })
 
+
+router.beforeEach((to,from,next) => {
+  const publicPages = ["/","/Login","/SignUp"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem("user");
+
+  if (authRequired && !loggedIn) {
+    next("/Login");
+  }else {
+    next();
+  }
+});
 export default router
