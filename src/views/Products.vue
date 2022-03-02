@@ -50,7 +50,7 @@
              <button class="btn" style="font-size: 25px"><i class="fas fa-cart-plus"></i></button>
      </div>
     
-      <div class=" b text-center margin-top-25">
+      <div class=" b text-center margin-top-25" v-if="currentUser._id.valueOf() == product.created_by.valueOf()">
                     <button class="btn btn-mod btn-border btn-large">EDIT</button>
                     <button class="btn btn-mod btn-border btn-large" id="delete" @click="deleteProduct(product._id)">DELETE</button>
       </div>

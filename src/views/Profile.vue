@@ -20,7 +20,7 @@
     </p>
     <p>
       <strong>Email:</strong>
-      {{ currentUser.email }}
+      {{ currentUser }}
     </p>
      <p>
       <strong>Phone Number:</strong>
@@ -38,7 +38,7 @@ export default {
   },
   mounted() {
     if (!this.currentUser) {
-      this.$router.push("/login");
+      this.$router.push("/Login");
     }
   },
 };
