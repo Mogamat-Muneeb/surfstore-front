@@ -12,7 +12,6 @@
                     <label class="form-label" id="nameLabel" for="name"></label>
                     <Field type="text" class="form-control" id="fullname" name="fullname" placeholder="Username" tabindex="1"  />
                     <ErrorMessage name="fullname" class="error-feedback" />
-    
                 </div>
 
                 <div class="form-group">
@@ -38,7 +37,7 @@
 
                 </div>
           <div class="signUp">
-              <h6> Already have an account? <a href="#" id="signup">LOGIN</a> </h6>   
+              <h6> Already have an account?   <router-link :to="{ name: 'Login'}">Login</router-link></h6>      
           </div>
         
         </div>

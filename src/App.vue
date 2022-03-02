@@ -42,7 +42,7 @@ export default {
 #nav a {
   font-weight: bold;
   color: #012966;
-  text-decoration:none; ;
+  text-decoration:none;
 }
 
 #nav a.router-link-exact-active {
@@ -50,6 +50,12 @@ export default {
   text-decoration: none;
 }
 
+.btn{
+  font-weight: bold;
+  color: #012966;
+  text-decoration:none; 
+  
+}
 
 
 

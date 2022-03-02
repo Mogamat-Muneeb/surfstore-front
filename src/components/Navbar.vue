@@ -15,7 +15,7 @@
     <router-link v-if="currentUser"  @click="toggleNav" :to="{ name: 'Products'}">Products</router-link>
     <router-link v-if="currentUser" @click="toggleNav" :to="{ name: 'Profile'}">Profile</router-link>
     <router-link v-if="currentUser" @click="toggleNav" :to="{ name: 'Cart'}">Cart</router-link>
-    <button class="btn" v-if="currentUser" @click="logOut">logout</button>
+    <button class="btn" v-if="currentUser" @click="logOut">Logout</button>
 </nav>    
 <button id="nav-btn" @click="toggleNav">
     <i class="fa fa-bars"></i>

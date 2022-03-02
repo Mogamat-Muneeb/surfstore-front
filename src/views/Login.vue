@@ -32,7 +32,8 @@
             
         </div>
         <div class="signUp">
-             <a href="#" id="signup">Don't have an account yet?</a>
+            
+             <h6> Don't have an account yet?<router-link :to="{ name: 'SignUp'}"> Sign Up</router-link></h6>
         </div>
         
        

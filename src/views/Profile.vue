@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <header class="jumbotron">
-      <h3>
-        <strong>{{ currentUser.fullname }}</strong> Profile
-      </h3>
+      <h1>
+        PROFILE
+      </h1>
     </header>
      <p>
       <strong>Name:</strong>
@@ -22,6 +22,10 @@
       <strong>Email:</strong>
       {{ currentUser.email }}
     </p>
+     <p>
+      <strong>Phone Number:</strong>
+      {{ currentUser.phone_number }}
+    </p>
   </div>
 </template>
 <script>
@@ -39,3 +43,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.container {
+    /* display: flex;
+    justify-content: center; */
+    margin-top: 130px;
+}
+</style>
