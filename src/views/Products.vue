@@ -52,26 +52,58 @@
     
       <div class=" b text-center margin-top-25">
                     <button class="btn btn-mod btn-border btn-large">EDIT</button>
-                    <button class="btn btn-mod btn-border btn-large">DELETE</button>
+                    <button class="btn btn-mod btn-border btn-large" id="delete" @click="deleteProduct(product._id)">DELETE</button>
       </div>
 
       
      </div>
 
   </div>
-   <button class="btn btn-mod btn-border btn-large">ADD A PRODUCTS</button>
-  
+   <button id="submit-btn" class="btn btn-mod btn-border btn-large" @click="toggleModal">ADD A PRODUCTS</button>
+  <Modal @clicked="toggleModal" v-if="showModal"/>
 </template>
 
 <script>
+import Modal from "../components/Modal.vue";
 import UserService from "../services/user.service";
 export default {
+  components: {Modal},
   name: "Products",
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+  },
   data() {
     return {
       content: "",
+      showModal: false
     };
   },
+  methods: {
+    toggleModal(){
+      this.showModal = !this.showModal
+    },
+    deleteProduct(product){
+            this.loading = true;
+            this.$store.dispatch("product/delete", product).then(
+              () => {
+                location.reload();
+              },
+              (error) => {
+                this.loading = false;
+                this.message =
+                  (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                  error.message ||
+                  error.toString();
+              }
+            );
+
+        }
+  },
+
   mounted() {
     UserService.getPublicContent().then(
       (response) => {
@@ -174,7 +206,10 @@ export default {
   padding:10px;
   font-weight: bold;
 }
-
+.testimonial:hover{
+  transform: scale(1.1); 
+  transition: 0.5s;
+}
 
 
 @media only screen and (max-width: 904px){
