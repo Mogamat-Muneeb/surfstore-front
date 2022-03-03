@@ -90,7 +90,7 @@ export default {
       this.showModal = !this.showModal
     },
      toggleModal2(){
-      this.showModal = !this.showModal
+      this.showModal2 = !this.showModal2
     },
     changeUpdater(i){
       this.updateContent = this.content[i]
