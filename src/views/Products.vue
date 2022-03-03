@@ -3,7 +3,7 @@
     
      <div class="sort">
           <label for="catergorySort" class="form-label"> SORT BY CATERGORY:</label>
-          <select name="catergorySort" id="catergorySort" onchange="catergorySort()">
+          <select name="catergorySort" id="catergorySort" @change="catergorySort()">
             <option value="All">All</option>
             <option value="Surf Boards">Surf Boards</option>
             <option value="Wet Suits">Wet Suits</option>
@@ -13,7 +13,7 @@
       
        <div class="sort">
          <label for="priceSort" class="form-label">SORT BY PRICE:</label>
-         <select name="priceSort" id="priceSort" onchange="priceSort()">
+         <select name="priceSort" id="priceSort" @change="priceSort()">
           <option value="ascending">Ascending</option>
           <option value="descending">Descending</option>
         </select>
@@ -21,7 +21,7 @@
 
        <div class="sort">
         <label for="sortName" class="form-label">SORT BY NAME:</label>
-        <select name="sortName" id="sortName" onchange="sortName()">
+        <select name="sortName" id="sortName" @change="sortName()">
           <option value="ascending">Ascending</option>
           <option value="descending">Descending</option>
         </select>
@@ -30,7 +30,7 @@
     
   <div class="contai ">
    
-     <div v-for="product of content" :key="product._id" class="testimonial">
+     <div v-for="product in content" :key="product._id" class="testimonial">
       <div >
         <img class="test_img" :src="product.img" />
       </div>
@@ -51,7 +51,7 @@
      </div>
     
       <div class=" b text-center margin-top-25" v-if="currentUser._id.valueOf() == product.created_by.valueOf()">
-                    <button class="btn btn-mod btn-border btn-large">EDIT</button>
+                    <button class="btn btn-mod btn-border btn-large" id="edit"  @click="changeUpdater(i)">EDIT</button>
                     <button class="btn btn-mod btn-border btn-large" id="delete" @click="deleteProduct(product._id)">DELETE</button>
       </div>
 
@@ -61,28 +61,40 @@
   </div>
    <button id="submit-btn" class="btn btn-mod btn-border btn-large" @click="toggleModal">ADD A PRODUCTS</button>
   <Modal @clicked="toggleModal" v-if="showModal"/>
+  <UpdateModal :updateContent="updateContent" @clicked="toggleModal2" v-if="showModal2"/>
+
 </template>
 
 <script>
 import Modal from "../components/Modal.vue";
+import UpdateModal from "../components/UpdateModal.vue"
 import UserService from "../services/user.service";
 export default {
-  components: {Modal},
+  components: {Modal, UpdateModal},
   name: "Products",
   computed: {
-    currentUser() {
+    currentUser() { 
       return this.$store.state.auth.user;
     },
   },
   data() {
     return {
       content: "",
-      showModal: false
+      showModal: false,
+      showModal2: false,
+      updateContent: ""
     };
   },
   methods: {
     toggleModal(){
       this.showModal = !this.showModal
+    },
+     toggleModal2(){
+      this.showModal = !this.showModal
+    },
+    changeUpdater(i){
+      this.updateContent = this.content.products[i]
+      this.showModal2 = !this.showModal2
     },
     deleteProduct(product){
             this.loading = true;
@@ -101,7 +113,9 @@ export default {
               }
             );
 
-        }
+        },
+        
+
   },
 
   mounted() {

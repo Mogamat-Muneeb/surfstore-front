@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
+import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import Products from '../views/Products.vue'
@@ -8,7 +8,7 @@ import Products from '../views/Products.vue'
 import Cart from '../views/Cart.vue'
 // import { from } from 'core-js/core/array'
 
-const Profile = () => import("../views/Profile.vue")
+// const  = () => import("../views/Profile.vue")
 const routes = [
   {
     path: '/',

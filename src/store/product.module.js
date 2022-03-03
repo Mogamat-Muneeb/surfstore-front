@@ -30,22 +30,18 @@ export const product = {
           }
         );
       },
-    // logout({ commit }) {
-    //   AuthService.logout();
-    //   commit("logout");
-    // },
-    // register({ commit }, user) {
-    //   return AuthService.register(user).then(
-    //     (response) => {
-    //       commit("registerSuccess");
-    //       return Promise.resolve(response.data);
-    //     },
-    //     (error) => {
-    //       commit("registerFailure");
-    //       return Promise.reject(error);
-    //     }
-    //   );
-    // },
+      update({ commit }, product) {
+        return ProductService.update(product).then(
+          (product) => {
+            commit("CreatedProduct", product);
+            return Promise.resolve(product);
+          },
+          (error) => {
+            commit("NotCreated");
+            return Promise.reject(error);
+          }
+        );
+      },
   },
   mutations: {
     CreatedProduct(state, product) {
@@ -54,15 +50,5 @@ export const product = {
     NotCreated(state) {
       state.product = null;
     },
-    // logout(state) {
-    //   state.status.loggedIn = false;
-    //   state.user = null;
-    // },
-    // registerSuccess(state) {
-    //   state.status.loggedIn = false;
-    // },
-    // registerFailure(state) {
-    //   state.status.loggedIn = false;
-    // },
   },
 };

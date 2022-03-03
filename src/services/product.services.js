@@ -24,6 +24,7 @@ class ProductService{
         category: product.category,
         description: product.description,
         img: product.img,
+        price: product.price
       }, 
         { headers: authHeader() })
 }
