@@ -1,6 +1,6 @@
 <template>
-  <div class="upd" @click.self="toggleModal">
-      <div class="card"> 
+  <div class="bruh" @click.self="toggleModal">
+      <div class="card">
         <Form @submit="updateProduct" :validation-schema="schema">
           <div class="form-group">
             <label for="title" style="padding-top:13px">title</label>
@@ -11,9 +11,9 @@
           <div class="form-group">
             <label for="category" style="padding-top:13px">category</label>
             <Field name="category" as="select" class="form-content" :value="updateContent.category">
-                <option value="Crewneck">Crewneck</option>
-                <option value="Hoodie">Hoodie</option>
-                <option value="Cropped Hoodie">Cropped Hoodie</option>
+                <option value="Crewneck">Wet Suits</option>
+                <option value="Hoodie">Surf Boards</option>
+  
             </Field>
             <div class="form-border"></div>
             <ErrorMessage name="category" class="error-feedback" />
@@ -109,7 +109,7 @@ export default {
 </script>
 
 <style>
-    .upd {
+    .bruh {
         position: fixed;
         top: 0;
         width: 100%;
@@ -121,11 +121,9 @@ export default {
     .form-content {
         width: 100%;
     }
-    .upd .card {
+    .bruh .card {
         height: fit-content;
         padding: 2rem;
         margin: 0 auto;
     }
-    
 </style>
-

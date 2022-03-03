@@ -45,10 +45,10 @@ export const product = {
   },
   mutations: {
     CreatedProduct(state, product) {
-      state.product = product;
+      state.product = product; //if we get a product
     },
     NotCreated(state) {
-      state.product = null;
+      state.product = null; // if we dont get a product
     },
   },
 };

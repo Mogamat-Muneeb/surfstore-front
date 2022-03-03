@@ -70,7 +70,7 @@ import Modal from "../components/Modal.vue";
 import UpdateModal from "../components/UpdateModal.vue"
 import UserService from "../services/user.service";
 export default {
-  components: {Modal, UpdateModal},
+  components: {Modal, UpdateModal },
   name: "Products",
   computed: {
     currentUser() { 
@@ -93,7 +93,7 @@ export default {
       this.showModal = !this.showModal
     },
     changeUpdater(i){
-      this.updateContent = this.content.products[i]
+      this.updateContent = this.content[i]
       this.showModal2 = !this.showModal2
     },
     deleteProduct(product){
