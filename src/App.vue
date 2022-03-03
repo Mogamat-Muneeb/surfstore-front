@@ -50,11 +50,11 @@ export default {
   text-decoration: none;
 }
 
-.btn{
+.btn {
   font-weight: bold;
   color: #012966;
   text-decoration:none; 
-  
+  margin-top: -7px;
 }
 
 
