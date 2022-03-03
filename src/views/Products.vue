@@ -30,7 +30,7 @@
     
   <div class="contai ">
    
-     <div v-for="product in content" :key="product._id" class="testimonial">
+     <div v-for="(product, i) in content" :key="product._id" class="testimonial">
       <div >
         <img class="test_img" :src="product.img" />
       </div>
@@ -46,8 +46,8 @@
         
      </div>
      <div class="access">
-     <input type="number" class="form-control" value="1" min="1" id="addToCart()">
-             <button class="btn" style="font-size: 25px"><i class="fas fa-cart-plus"></i></button>
+     <input type="number" class="form-control" value="1" min="1" :id="`addToCart${i}`">
+             <button class="btn" @click="addToCart(product,i)" style="font-size: 25px"><i class="fas fa-cart-plus"></i></button>
      </div>
     
       <div class=" b text-center margin-top-25" v-if="currentUser._id.valueOf() == product.created_by.valueOf()">
@@ -114,7 +114,25 @@ export default {
             );
 
         },
-        
+         addToCart(product,i){
+           let qty = document.querySelector(`#addToCart${i}`).value;
+      fetch('https://surfstore-backend.herokuapp.com/cart/' + product._id, {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken
+  },
+  body: JSON.stringify({qty: parseInt(qty)}),
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+  localStorage.setItem('user', JSON.stringify(data))
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+    }
 
   },
 
