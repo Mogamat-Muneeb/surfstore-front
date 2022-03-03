@@ -46,8 +46,8 @@
         
      </div>
      <div class="access">
-     <input type="number" class="form-control" value="1" min="1" :id="`addToCart${i}`">
-             <button class="btn" @click="addToCart(product,i)" style="font-size: 25px"><i class="fas fa-cart-plus"></i></button>
+     <input type="number" class="form-control" value="1" min="1" :id="`qty${i}`">
+             <button class="btn" @click="addToCart(product, i)" style="font-size: 25px"><i class="fas fa-cart-plus"></i></button>
      </div>
     
       <div class=" b text-center margin-top-25" v-if="currentUser._id.valueOf() == product.created_by.valueOf()">
@@ -82,7 +82,7 @@ export default {
       content: "",
       showModal: false,
       showModal2: false,
-      updateContent: ""
+      updateContent: "",
     };
   },
   methods: {
@@ -114,8 +114,8 @@ export default {
             );
 
         },
-         addToCart(product,i){
-           let qty = document.querySelector(`#addToCart${i}`).value;
+         addToCart(product, i){
+           let qty = document.querySelector(`#qty${i}`).value;
       fetch('https://surfstore-backend.herokuapp.com/cart/' + product._id, {
   method: 'POST', // or 'PUT'
   headers: {
@@ -162,10 +162,10 @@ export default {
 
 
 }
-.access{
-  display:flex;
-  justify-content:center;
-}
+  .access{
+    display:flex;
+    justify-content:center;
+  }
 .form-control{
   width:150px;
 }

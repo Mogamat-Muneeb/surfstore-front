@@ -5,7 +5,7 @@
     </header>
      <div>
       <strong class="name">Fullname:</strong>
-      <h6>{{ currentUser.playername }}</h6>
+      <h6>{{ currentUser.user }}</h6>
     </div>
     <div>
       <strong class="name">Token:</strong>

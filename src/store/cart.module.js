@@ -30,6 +30,18 @@ export const cart = {
           }
         );
       },
+      deleteOne({ commit }, product) {
+        return CartService.deleteOne(product).then(
+          (product) => {
+            commit("AddProduct", product);
+            return Promise.resolve(product);
+          },
+          (error) => {
+            commit("NotAdded");
+            return Promise.reject(error);
+          }
+        );
+      },
       update({ commit }, product) {
         return ProductService.update(product).then(
           (product) => {
